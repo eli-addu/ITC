@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1> Unit Converter</h1>
+        <div class="conversion types here">
+            <label for="types">Pick which conversion to do!</label>
+            <select id="types">
+                <option value="ctf">Celsius to Farenheit</option>WW
+                <option value="ftc">Farenheit to Celsius</option>
+                <option value="mtf">Meters to Feet</option>
+                <option value="ftm">Feet to Meters</option>
+            </select>
+        </div>
+
+        <div class="input goes here i think">
+        <label>Input Number:</label>
+            <input type="number" id="InputHere">
+        </div>
+
+        <div class="the button">
+            <button onclick="convert()">CONVERT!</button>        
+        </div>
+
+        <br>
+
+        <div class="THE RESULT!">
+            <h2 id="THE RESULT">Result is: </h2>
+        </div>
+
+        <br>
+        <a href="index.html"><button>Return to Main Page</button></a>      
+    </div>
+
+
+    <script>
+        function convert() {
+            var type = document.getElementById("types").value;
+            var n = document.getElementById("InputHere").value;
+<!-- made by eli-->            
+            var result = 0;
+
+            if (type == "ctf"){result = (n*9/5)+32}
+            if (type == "ftc"){result = (n-32)*5/9}
+            if (type == "mtf"){result = n*3.28084}
+            if (type == "ftm"){result = n/3.28084}
+
+
+            document.getElementById("THE RESULT").innerHTML = "Result is: " + result;
+        }
+       
+
+    </script>
+
+</body>
+</html>

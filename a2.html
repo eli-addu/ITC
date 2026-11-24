@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Income Tax Calculator</h1>
+
+        <div class="input goes here i think">
+            <label for="InputHere">Input Taxable Income:</label>
+            <input type="number" id="InputHere">
+        </div>
+
+        <div class="the button">
+            <button onclick="Tax()">COMPUTE TAX!</button>        
+        </div>
+
+        <br>
+
+        <div class="THE RESULT!">
+            <h2 id="THE RESULT">Income Tax is: </h2>
+        </div>
+
+        <br>
+        <a href="index.html"><button>Return to Main Page</button></a>      
+    </div>
+
+
+    <script>
+        function Tax() {
+            var n = parseFloat(document.getElementById("InputHere").value);
+            var tax = 0;
+
+            if (n <= 250000) { tax = 0; }
+            if (n > 250000 && n <= 400000) { tax = (n - 250000) * 0.20; }
+            if (n > 400000 && n <= 800000) { tax = 30000 + ((n - 400000) * 0.25); }
+            if (n > 800000 && n <= 2000000) { tax = 130000 + ((n - 800000) * 0.30); }
+            if (n > 2000000 && n <= 8000000) { tax = 490000 + ((n - 2000000) * 0.32); }
+            if (n > 8000000) { tax = 2410000 + ((n - 8000000) * 0.35); }
+
+            document.getElementById("THE RESULT").innerHTML = "Income Tax is: " + tax;
+<!-- made by eli-->        
+        }
+    </script>
+
+</body>
+</html>

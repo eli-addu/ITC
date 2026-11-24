@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 4</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .container {
+            width: fit-content;
+            max-width: 47%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Payroll</h1>
+
+        <div class="add employee">
+            <label for="empName">Employee Name:</label>
+            <input type="text" id="empName">
+
+            <label for="daysWorked">Days Worked:</label>
+            <input type="number" id="daysWorked" step="0.01">
+
+            <label for="dailyRate">Daily Rate:</label>
+            <input type="number" id="dailyRate" step="0.01">
+
+            <label for="deduction">Deduction Amount:</label>
+            <input type="number" id="deduction" step="0.01">
+
+            <br><br>
+            <button onclick="addEmployee()">ADD EMPLOYEE</button>
+        </div>
+
+        <br>
+
+        <div class="delete employee">
+            <label for="deleteLine">Line Number to Delete:</label>
+            <input type="number" id="deleteLine" min="1">
+            <button onclick="deleteEmployee()">DELETE EMPLOYEE</button>
+        </div>
+
+        <br>
+<!-- made by eli-->
+        <table id="payrollTable" border="1" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Employee Name</th>
+                    <th>Days Worked</th>
+                    <th>Daily Rate</th>
+                    <th>Gross Pay</th>
+                    <th>Deduction Amount</th>
+                    <th>Net Pay</th>
+                </tr>
+            </thead>
+            <tbody id="payrollBody">
+                <tr>
+                    <td colspan="7" align="center">No employees added yet.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <a href="index.html"><button>Return to Main Page</button></a>
+    </div>
+
+    <script>
+        var payroll = [];
+
+        function addEmployee() {
+            var name = document.getElementById("empName").value;
+            var days = parseFloat(document.getElementById("daysWorked").value);
+            var rate = parseFloat(document.getElementById("dailyRate").value);
+            var deduction = parseFloat(document.getElementById("deduction").value);
+
+            if (name == "" || isNaN(days) || isNaN(rate) || isNaN(deduction)) {
+                return;
+            }
+
+            var gross = days * rate;
+            var net = gross - deduction;
+
+            payroll.push({
+                name: name,
+                days: days,
+                rate: rate,
+                gross: gross,
+                deduction: deduction,
+                net: net
+            });
+
+            renderTable();
+
+            document.getElementById("empName").value = "";
+            document.getElementById("daysWorked").value = "";
+            document.getElementById("dailyRate").value = "";
+            document.getElementById("deduction").value = "";
+        }
+
+        function deleteEmployee() {
+            var line = parseInt(document.getElementById("deleteLine").value);
+
+            if (isNaN(line) || line < 1 || line > payroll.length) {
+                return;
+            }
+
+            payroll.splice(line - 1, 1);
+            renderTable();
+            document.getElementById("deleteLine").value = "";
+        }
+
+        function renderTable() {
+            var body = document.getElementById("payrollBody");
+            var rows = "";
+
+            if (payroll.length == 0) {
+                body.innerHTML = "<tr><td colspan='7' align='center'>No employees added yet.</td></tr>";
+                return;
+            }
+
+            for (var i = 0; i < payroll.length; i++) {
+                var emp = payroll[i];
+                var no = i + 1;
+
+                rows = rows + "<tr>" +
+                    "<td align='center'>" + no + "</td>" +
+                    "<td>" + emp.name + "</td>" +
+                    "<td align='right'>" + emp.days + "</td>" +
+                    "<td align='right'>" + emp.rate.toFixed(2) + "</td>" +
+                    "<td align='right'>" + emp.gross.toFixed(2) + "</td>" +
+                    "<td align='right'>" + emp.deduction.toFixed(2) + "</td>" +
+                    "<td align='right'>" + emp.net.toFixed(2) + "</td>" +
+                    "</tr>";
+            }
+
+            body.innerHTML = rows;
+        }
+    </script>
+
+</body>
+</html>

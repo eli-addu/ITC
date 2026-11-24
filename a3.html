@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigment 3</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<style>
+.looping {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+.looping::after {
+  content: '';
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 0.3em;
+  border: 0.1em solid #ddd;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); } 
+}
+</style>
+<body>
+     <div class="container">
+        <div class="looping">Looping</div>
+        <div class="Which Loop">
+            <label for="types">Pick what loop to do!</label>
+            <select id="types">
+                <option value=1>Factorial (While Loop)</option>
+                <option value=2>Sum (Do While Loop)</option>
+                <option value=3>Average (For Loop) of First N Natural Numbers</option>
+            </select>
+     </div>
+
+      <div class="input goes here i think">
+        <label>Input Number:</label>
+            <input type="number" id="InputHere">
+        </div>
+         <div class="the button">
+<!-- made by eli-->
+            <button onclick="looping()">LOOP!</button>        
+        </div>
+
+        <br>
+
+        <div class="THE RESULT!">
+            <h2 id="THE RESULT">Result is: </h2>
+        </div>
+
+        <br>
+        <a href="index.html"><button>Return to Main Page</button></a> 
+    </div>
+</body>
+<script>
+  function looping(){
+    var type = document.getElementById("types").value;
+    var n = document.getElementById("InputHere").value;
+    var result = 0;
+
+    if (type == 1){
+      var factorial = 1;
+      var i = 1;
+      while (i <= n) {
+        factorial = factorial * i;
+        i = i + 1;
+        }
+      document.getElementById("THE RESULT").innerHTML = "Result is: " + factorial;
+    }
+
+    else if (type == 2){
+        var sum = 0;
+        var j = 1;
+        do {
+          sum = sum + j;
+          j = j + 1;
+        } while (j <= n);
+        document.getElementById("THE RESULT").innerHTML = "Result is: " + sum;
+    }
+        else if (type == 3) {
+      var total = 0;
+      for (var k = 1; k <= n; k = k + 1) {
+        total = total + k;
+      }
+      var average = total / n;
+      document.getElementById("THE RESULT").innerHTML = "Result is: " + average;
+    }
+
+  }
+
+
+
+</script>
+</html>
